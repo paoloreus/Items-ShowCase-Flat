@@ -27,5 +27,15 @@ function deleteProduct(array $products,$pid){
     return $products;
 }
 
+function allInCategory(array $products,$category) {
+    $categories = array();
+    for($x = 0;$x<count($products);$x++) {
+        for($y=5;$y<count($products[$x]);$y++)
+        if ($products[$x][$y] == $category) {
+            $categories[] = $products[$x];
+        }
+    }
+    return $categories;
+}
 
 ?>
