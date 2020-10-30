@@ -1,13 +1,13 @@
 <?php
 include 'methods.php';
-$id=(!empty($_GET['id']) ? $_GET['id'] : "p0");
+$id=(!empty($_POST['id']) ? $_POST['id'] : "p0");
 $product = getProduct(getProducts(),$id);
-$product[1]=(!empty($_GET['title']) ? $_GET['title'] : $product[1]);
-$product[2]=(!empty($_GET['description']) ? $_GET['description'] : $product[2]);
-$product[3]=(!empty($_GET['price']) ? $_GET['price'] : $product[3]);
-$product[4]=(!empty($_GET['image']) ? $_GET['image'] : $product[4]);
-$delete_action = (!empty($_GET['delete']) ? $_GET['delete'] : array());
-$newCategory = (!empty($_GET['category']) ? $_GET['category'] : '');
+$product[1]=(!empty($_POST['title']) ? $_POST['title'] : $product[1]);
+$product[2]=(!empty($_POST['description']) ? $_POST['description'] : $product[2]);
+$product[3]=(!empty($_POST['price']) ? $_POST['price'] : $product[3]);
+$product[4]=(!empty($_POST['image']) ? $_POST['image'] : $product[4]);
+$delete_action = (!empty($_POST['delete']) ? $_POST['delete'] : array());
+$newCategory = (!empty($_POST['category']) ? $_POST['category'] : '');
 
 $temp=$product;
 for($x = 0;$x<count($delete_action);$x++) {
