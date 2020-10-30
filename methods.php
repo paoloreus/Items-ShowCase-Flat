@@ -65,4 +65,22 @@ function allInCategory(array $products,$category) {
     return $categories;
 }
 
+function getCategories()
+{
+    $file = fopen('categories.csv', 'rb');
+    $categories = array();
+
+    while (!feof($file)) {
+
+        $category = fgetcsv($file);
+
+        if ($category === false) {
+            continue;
+        }
+
+        $categories[] = $category;
+    }
+    return $categories;
+}
+
 ?>
