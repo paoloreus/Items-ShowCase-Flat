@@ -10,12 +10,30 @@ function getProducts(){
     return $products;
 }
 
+function getProduct(array $products,$pid){
+    foreach($products as $product){
+        if($product[0]==$pid){
+            return $product;
+        }
+    }
+    return array();
+}
+
 function saveProducts(array $products){
     $file = fopen('products.csv','wb');
     foreach($products as $product){
         fputcsv($file,$product);
     }
     fclose($file);
+}
+
+function saveProduct(array $products,array $product){
+    for($x = 0;$x<count($products);$x++) {
+        if ($products[$x][0] == $product[0]) {
+            $products[$x] == $product;
+        }
+    }
+    saveProducts($products);
 }
 
 function deleteProduct(array $products,$pid){
@@ -25,6 +43,15 @@ function deleteProduct(array $products,$pid){
         }
     }
     return $products;
+}
+
+function removeFromCategory(array $product,$category){
+    for($x=5;$x<count($product);$x++){
+        if($product[$x]==$category){
+            array_splice($product,$x,1);
+        }
+    }
+    return $product;
 }
 
 function allInCategory(array $products,$category) {
