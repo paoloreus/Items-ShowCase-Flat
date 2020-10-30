@@ -1,3 +1,5 @@
+<html>
+<head>
 <script LANGUAGE="JavaScript">
     function confirmSubmit()
     {
@@ -17,7 +19,7 @@
         cursor: pointer;
     }
 </style>
-<html>
+</head>
 <body>
 <?php
 include 'methods.php';
@@ -35,7 +37,7 @@ echo "<table>";
     foreach($products as $product){
 
         echo "<tr><th><img src=" . $product[4] . "></th>";
-        echo "<th><form action='adminItem.php' method='post'><input type='hidden' name='id' value='$product[0]'><input type='submit' value='$product[1]' class='link-lookalike'/></form></th><th>$product[2]</th><th>$product[3]</th>" . '<th><form method="post"><input type = hidden name = delete[] value=' . $product[0] . "><Input type='submit' value='Delete' name='submit' onClick='return confirmSubmit()'></form></th></tr> \n";
+        echo "<th> <form action='adminItem.php' method='post'><input type='hidden' name='id' value='$product[0]'><input type='submit' value='Product: $product[1]' class='link-lookalike'/></form></th><th>Description: $product[2]</th><th>Price: $product[3]¢</th>" . '<th><form method="post"><input type = hidden name = delete[] value=' . $product[0] . "><Input type='submit' value='Delete' name='submit' onClick='return confirmSubmit()'></form></th></tr> \n";
     }
 
 echo    ' </table>';
