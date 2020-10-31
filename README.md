@@ -1,4 +1,1 @@
-# Comp1230----Assignment By Jeremy, Satabdi and Paolo.
-Jeremy Buchanan 100928225
-Paolo Tous      101325245
-Satabdi Sangma  101287632
+# Use this branch if you are having issues with code in your file, upload your file/s here so we can all take a look and attempt to figure it out
