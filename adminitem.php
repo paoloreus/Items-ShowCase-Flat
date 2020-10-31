@@ -1,11 +1,22 @@
 <?php
+
 include 'methods.php';
 $id=(!empty($_POST['id']) ? $_POST['id'] : "p0");
 $product = getProduct(getProducts(),$id);
+if(isset($_FILES['upload'])  && $_FILES['upload']['size'] > 0){
+    include 'upload.php';
+    echo "<br>";
+    if($upload_info == 1){
+        if($product[4] != "default.jpg"){
+            unlink("$name_dir"."$product[4]");
+        }
+        $product[4]=basename($_FILES["upload"]["name"]);
+        saveProduct(getProducts(),$product);
+    }
+}
 $product[1]=(!empty($_POST['title']) ? $_POST['title'] : $product[1]);
 $product[2]=(!empty($_POST['description']) ? $_POST['description'] : $product[2]);
 $product[3]=(!empty($_POST['price']) ? $_POST['price'] : $product[3]);
-$product[4]=(!empty($_POST['image']) ? $_POST['image'] : $product[4]);
 $delete_action = (!empty($_POST['delete']) ? $_POST['delete'] : array());
 $newCategory = (!empty($_POST['category']) ? $_POST['category'] : '');
 
@@ -27,12 +38,15 @@ if($newCategory != ''){
 
 if(count($temp)>5){
    $product = $temp;
-
+   if(!empty($_POST['submit'])){
+       saveProduct(getProducts(),$product);
+   }
 } else {
     echo "All items must belong to at least 1 category";
 }
 
-echo "<form>
+echo "Current Image:<br><img src='$product[4]'><br>
+<form action='adminitem.php' method='post' enctype='multipart/form-data'>
 <input type='hidden' name='id' value='$product[0]'>
 <label for='title'>Title:</label>
 <input type='text' id='title' name='title' maxlength='100' value ='$product[1]'><br>
@@ -40,8 +54,8 @@ echo "<form>
 <input type='text' id='description' name='description' maxlength='255' value ='$product[2]'><br>
 <label for='price'>Price in cents:</label>
 <input type='number' id='price' min = 0 step = 1 name='price' value ='$product[3]'><br>
-<label for='image'>Image Name:</label>
-<input type='text' id='image' name='image' value ='$product[4]'><br>\n";
+<label for='upload'>Upload New Image:</label>
+<input type='file' name='upload' id='upload'><br>";
 
 
 for($z=5;$z<count($product);$z++){
@@ -66,4 +80,4 @@ foreach(getCategories() as $category){
     echo "<option value='$category[1]'>$category[1]</option>";
 }
 
-echo "</select><br><input type='submit' value='Submit'></form>";
+echo "</select><br><input type='submit' value='submit' name='submit'></form>";

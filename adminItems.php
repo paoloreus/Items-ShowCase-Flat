@@ -28,11 +28,11 @@ $products=getProducts();
 for($x = 0;$x<count($page_action);$x++) {
     $products=deleteProduct($products,$page_action[$x]);
 }
-/*
+
 if(!empty($_POST['delete'])){
     saveProducts($products);
 }
-*/
+
 echo "<table>";
     foreach($products as $product){
 

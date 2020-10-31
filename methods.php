@@ -30,7 +30,7 @@ function saveProducts(array $products){
 function saveProduct(array $products,array $product){
     for($x = 0;$x<count($products);$x++) {
         if ($products[$x][0] == $product[0]) {
-            $products[$x] == $product;
+            $products[$x] = $product;
         }
     }
     saveProducts($products);
