@@ -1,8 +1,9 @@
 <?php
 
 include 'methods.php';
-$id=(!empty($_POST['id']) ? $_POST['id'] : "p0");
-$product = getProduct(getProducts(),$id);
+$id=(!empty($_POST['id']) ? $_POST['id'] : "0");
+$products = getProducts();
+$product = getProduct($products,$id);
 if(isset($_FILES['upload'])  && $_FILES['upload']['size'] > 0){
     include 'upload.php';
     echo "<br>";
@@ -11,7 +12,7 @@ if(isset($_FILES['upload'])  && $_FILES['upload']['size'] > 0){
             unlink("$name_dir"."$product[4]");
         }
         $product[4]=basename($_FILES["upload"]["name"]);
-        saveProduct(getProducts(),$product);
+        saveProduct($products,$product);
     }
 }
 $product[1]=(!empty($_POST['title']) ? $_POST['title'] : $product[1]);
@@ -39,10 +40,10 @@ if($newCategory != ''){
 if(count($temp)>5){
    $product = $temp;
    if(!empty($_POST['submit'])){
-       saveProduct(getProducts(),$product);
+       saveProduct($products,$product);
    }
 } else {
-    echo "All items must belong to at least 1 category";
+    echo "All items must belong to at least 1 category<br>";
 }
 
 echo "Current Image:<br><img src='$product[4]'><br>
@@ -51,7 +52,7 @@ echo "Current Image:<br><img src='$product[4]'><br>
 <label for='title'>Title:</label>
 <input type='text' id='title' name='title' maxlength='100' value ='$product[1]'><br>
 <label for='description'>Description:</label>
-<input type='text' id='description' name='description' maxlength='255' value ='$product[2]'><br>
+<textarea id='description' name='description' rows= 5 cols = 51 required maxlength='255'>$product[2]</textarea><br>
 <label for='price'>Price in cents:</label>
 <input type='number' id='price' min = 0 step = 1 name='price' value ='$product[3]'><br>
 <label for='upload'>Upload New Image:</label>
